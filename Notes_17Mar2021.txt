@@ -1,0 +1,134 @@
+1) Login
+2) Sign up
+3) common menu
+4) authorization
+5) Logout
+6) different design
+7) disable browser back button. All navigations should be done only via menu options
+
+Admin is allowed to access any page
+1 CRUD operations of any entity
+
+Users should be able to view those entities. But disable the Add/Modify/Delete buttons for users
+
+Only admins can manipulate the entity
+
+
+All users (user/admin) have only same login page
+
+only after login, their role is identified
+
+8) Remember me "check box" 
+	use cookies to remember the user who logged in
+	When i login, if the check box is selected, then the user should be remembered in cookie
+	next time if i visit login page, my username should be automatically displayed with password
+
+9) there should be a show password check box. to show or mask password based on that
+
+10) All users' password should be encrypted when they signup.
+
+11) signup process should include OTP using java mail
+	if otp is correct then only signup is successful
+	means, email id should be a field in signup
+
+12) 1 procedure should be done in plsql and use it from dao
+
+13) validations	(data entry)	and error messages
+	prevent submit button if there are any validation failure
+15) exception handling
+	all runtime exceptions to be handled
+
+we can create error pages in JSP
+	the pages that can be displayed when an exception occurs
+
+error.jsp
+<%@page isErrorPage="true" >
+
+this makes a jsp page as an error page
+
+in other jsp pages,
+
+<%@page errorPage="error.jsp" >
+
+to refer that whenever an exception occurs in this jsp page, redirect to that error.jsp
+
+in error.jsp, we can find which page caused the error and what is the error.
+
+Display them and give a link to go back and try again same thing.
+
+
+
+
+Steps for otp process:
+1) in signup form add 2 textboxes and a button
+2) button should be "request otp"
+	use javascript / jquery click event for this "request otp" button
+3) in jquery, use $.ajax to call a servlet that is a java code, can send email "otp" and also print it out.print
+4) since we call this email servlet from ajax, that printed otp message will return as "result"
+5) result should be displayed in a text box (<input type=hidden)
+6) another text box is where user enters the otp after checking email.
+7) in the blur event of that user entered otp TEXT BOX, check if it is equal to <input type hidden>	otp
+8) if they matches then enable submit button. else display "Otp is not correct" and disable submit button
+
+
+
+Steps for Remember me:
+1) in login.jsp,
+	add a check box "Remember me"
+2) on submitting the form to LoginServlet,
+	servlet checks if the checkbox is tick or not.
+	if yes,
+		add a cookie for username
+		add a cookie for password
+
+3) In login.jsp,
+	in <input type=text name=username value="${cookie.username.value}" /><br/>
+	   <input type=password name="password" value="${cookie.password.value}" /><br/>
+
+
+Steps for show password:
+1) Show password check box
+	if selected, then the input type=password should change to <input type=text and vice versa
+
+	Do this in javascript.
+
+
+
+login.jsp
+	username......
+	password.....
+
+
+LoginServlet
+	get inputs
+		request.getParam.....
+		request.getP....
+	password is plain text
+	password=encryptSha1(password);
+
+	user=udao.read(uid,password);
+	if(user==null)
+		failed
+	else
+		success
+
+
+
+
+Steps for encryption:
+
+
+
+
+------------------------------
+Request otp means
+	i use jquery to call a servlet using AJAX
+	servlet is a java program that can send email otp
+	and servlet also prints the same otp so that 
+		it comes as a result back to ajax fn
+	that result is stored in a hidden field
+
+
+
+
+alter table user_master add (email varchar2(100) default 'rjagadeeswaran@yahoo.com');
